@@ -14,6 +14,8 @@ public class Figure {
         this.color = color;
         this.type = type;
         this.figureCoord = figureCoord;
+        this.maxCoord = maxCoord;
+        this.minCoord = minCoord;
     }
 
     public Coord getPosition() {

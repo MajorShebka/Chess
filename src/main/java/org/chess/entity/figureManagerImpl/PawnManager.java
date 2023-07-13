@@ -51,22 +51,21 @@ public class PawnManager implements FigureManager {
     }
 
     public boolean isCanTake(Figure takingFigure, Figure takenFigure, Set<Figure> figures) {
-        return checkTake(takingFigure)
-                && !takingFigure.getColor().equals(takingFigure.getColor());
+        return checkTake(takingFigure, takenFigure)
+                && !takingFigure.getColor().equals(takenFigure.getColor());
     }
 
-    private boolean checkTake(Figure takingFigure) {
-        return checkDefaultTake(takingFigure);
+    private boolean checkTake(Figure takingFigure, Figure takenFigure) {
+        return checkDefaultTake(takingFigure, takenFigure);
     }
 
-    private boolean checkDefaultTake(Figure takingFigure) {
+    private boolean checkDefaultTake(Figure takingFigure, Figure takenFigure) {
         Coord startCoord = takingFigure.getPosition();
-        Coord takeCoord = takingFigure.getPosition();
+        Coord takeCoord = takenFigure.getPosition();
         FigureColor color = takingFigure.getColor();
 
         return startCoord.getYCoord() == takeCoord.getYCoord() - getCoff(color)
-                && (startCoord.getXCoord() == takeCoord.getXCoord() - 1
-                || startCoord.getXCoord() == takeCoord.getXCoord() + 1);
+                && Math.abs(startCoord.getXCoord() - takeCoord.getXCoord()) == 1;
     }
 
     public void moveOn(Figure movingFigure, Coord moveCoord) {
