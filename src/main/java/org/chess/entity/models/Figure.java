@@ -3,6 +3,8 @@ package org.chess.entity.models;
 import org.chess.entity.enums.FigureColor;
 import org.chess.entity.enums.FigureType;
 
+import java.util.Objects;
+
 public class Figure {
     private FigureColor color;
     private FigureType type;
@@ -57,5 +59,18 @@ public class Figure {
                 ", type=" + type +
                 ", figureCoord=" + figureCoord +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Figure figure = (Figure) o;
+        return figureCoord.equals(figure.getPosition());
+    }
+
+    @Override
+    public int hashCode() {
+        return figureCoord.hashCode();
     }
 }

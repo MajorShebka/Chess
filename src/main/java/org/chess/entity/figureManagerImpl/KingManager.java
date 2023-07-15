@@ -22,17 +22,21 @@ public class KingManager implements FigureManager {
     private boolean checkHorizontal(Coord newCoord, Figure figure) {
         int currentYCoord = figure.getPosition().getYCoord();
         int futureYCoord = newCoord.getYCoord();
+        int currentXCoord = figure.getPosition().getXCoord();
+        int futureXCoord = newCoord.getXCoord();
 
-        return newCoord.getYCoord() == newCoord.getYCoord()
-                && Math.abs(currentYCoord - futureYCoord) == 1;
+        return currentYCoord == futureYCoord
+                && Math.abs(currentXCoord - futureXCoord) == 1;
     }
 
     private boolean checkVertical(Coord newCoord, Figure figure) {
         int currentXCoord = figure.getPosition().getXCoord();
         int futureXCoord = newCoord.getXCoord();
+        int currentYCoord = figure.getPosition().getYCoord();
+        int futureYCoord = newCoord.getYCoord();
 
-        return newCoord.getXCoord() == newCoord.getXCoord()
-                && Math.abs(currentXCoord - futureXCoord) == 1;
+        return currentXCoord == futureXCoord
+                && Math.abs(currentYCoord - futureYCoord) == 1;
     }
 
     private boolean checkDiagonals(Coord newCoord, Figure figure){
