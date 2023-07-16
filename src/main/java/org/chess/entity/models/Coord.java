@@ -1,5 +1,7 @@
 package org.chess.entity.models;
 
+import java.util.Objects;
+
 public class Coord {
     private int xCoord;
     private int yCoord;
@@ -32,5 +34,18 @@ public class Coord {
                 "xCoord=" + xCoord +
                 ", yCoord=" + yCoord +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Coord coord = (Coord) o;
+        return xCoord == coord.xCoord && yCoord == coord.yCoord;
+    }
+
+    @Override
+    public int hashCode() {
+        return xCoord + 10 * yCoord;
     }
 }

@@ -112,6 +112,6 @@ public class QueenManager implements FigureManager {
     }
 
     public void takeFigure(Figure takingFigure, Figure takenFigure) {
-        takingFigure.setPosition(takingFigure.getPosition());
+        takingFigure.setPosition(takenFigure.getPosition());
     }
 }
