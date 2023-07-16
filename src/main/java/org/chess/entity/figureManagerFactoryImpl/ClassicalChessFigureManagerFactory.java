@@ -15,7 +15,7 @@ public class ClassicalChessFigureManagerFactory implements FigureManagerFactory 
             case HORSE:
                 return new HorseManager();
             case BISHOP:
-                return new BishopFigureManager();
+                return new BishopManager();
             case QUEEN:
                 return new QueenManager();
             case KING:

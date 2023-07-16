@@ -10,6 +10,11 @@ import java.util.List;
 import java.util.Set;
 
 public class QueenManager implements FigureManager {
+    @Override
+    public List<Coord> getCoordsBetween(Figure figure, Coord coord) {
+        return getCoords(coord, figure);
+    }
+
     public boolean isCanMove(Figure movingFigure, Coord moveCoord, Set<Figure> figures) {
         return checkMove(moveCoord, movingFigure) && !checkFigureOnTheWay(figures, movingFigure, moveCoord);
     }

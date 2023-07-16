@@ -11,6 +11,11 @@ import java.util.List;
 import java.util.Set;
 
 public class TowerManager implements FigureManager {
+    @Override
+    public List<Coord> getCoordsBetween(Figure figure, Coord coord) {
+        return getCoords(coord, figure);
+    }
+
     public boolean isCanMove(Figure movingFigure, Coord moveCoord, Set<Figure> figures) {
         return checkMove(moveCoord, movingFigure) 
                 && !checkFigureOnTheWay(figures, movingFigure, moveCoord);
@@ -57,7 +62,8 @@ public class TowerManager implements FigureManager {
 
         while (presentCoord.getXCoord() != newCoord.getXCoord() || presentCoord.getYCoord() != newCoord.getYCoord()) {
             coords.add(presentCoord);
-            presentCoord = new Coord(presentCoord.getXCoord() + coff.getXCoord(), presentCoord.getYCoord() + coff.getYCoord());
+            presentCoord = new Coord(presentCoord.getXCoord() + coff.getXCoord(),
+                    presentCoord.getYCoord() + coff.getYCoord());
         }
 
         return coords;

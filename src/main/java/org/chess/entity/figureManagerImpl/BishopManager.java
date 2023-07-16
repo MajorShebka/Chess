@@ -9,7 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class BishopFigureManager implements FigureManager {
+public class BishopManager implements FigureManager {
+    @Override
+    public List<Coord> getCoordsBetween(Figure figure, Coord coord) {
+        return getCoords(coord, figure);
+     }
+
     public boolean isCanMove(Figure movingFigure, Coord moveCoord, Set<Figure> figures) {
         return checkMove(moveCoord, movingFigure) && !checkFigureOnTheWay(figures, movingFigure, moveCoord);
     }

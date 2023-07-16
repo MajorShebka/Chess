@@ -5,9 +5,16 @@ import org.chess.entity.enums.FigureColor;
 import org.chess.entity.models.Coord;
 import org.chess.entity.models.Figure;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class HorseManager implements FigureManager {
+    @Override
+    public List<Coord> getCoordsBetween(Figure figure, Coord coord) {
+        return new ArrayList<>();
+    }
+
     public boolean isCanMove(Figure movingFigure, Coord moveCoord, Set<Figure> figures) {
         return checkMove(moveCoord, movingFigure);
     }

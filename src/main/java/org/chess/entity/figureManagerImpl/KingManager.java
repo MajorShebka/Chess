@@ -5,9 +5,15 @@ import org.chess.entity.enums.FigureColor;
 import org.chess.entity.models.Coord;
 import org.chess.entity.models.Figure;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class KingManager implements FigureManager {
+    @Override
+    public List<Coord> getCoordsBetween(Figure figure, Coord coord) {
+        return new ArrayList<>();
+    }
 
     public boolean isCanMove(Figure movingFigure, Coord moveCoord, Set<Figure> figures) {
         return checkMove(moveCoord, movingFigure);
@@ -64,5 +70,45 @@ public class KingManager implements FigureManager {
 
     public void takeFigure(Figure takingFigure, Figure takenFigure) {
         takingFigure.setPosition(takenFigure.getPosition());
+        takenFigure.setPosition(new Coord(0, 0));
+    }
+
+    public List<Coord> getMoveCoords(Figure king, Set<Figure> figures){
+        final int[][] moveCoffs = new int[][]{{1, 0}, {0, 1}, {1, 1}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}};
+        List<Coord> coords = new ArrayList<>();
+
+        for(int i = 0; i < moveCoffs.length; i++){
+            int newXCoord = king.getPosition().getXCoord() + moveCoffs[i][0];
+            int newYCoord = king.getPosition().getYCoord() + moveCoffs[i][1];
+            Coord moveCoord = new Coord(newXCoord, newYCoord);
+
+            if(newXCoord > king.getMaxCoord().getXCoord() || newXCoord < king.getMinCoord().getXCoord()
+                    || newYCoord > king.getMaxCoord().getYCoord() || newYCoord < king.getMinCoord().getYCoord()){
+                continue;
+            }
+
+            if(isCanMove(king, moveCoord, figures)){
+                coords.add(moveCoord);
+            }
+
+            Figure figure = getFigureByCoord(moveCoord, figures);
+
+            if (figure != null && isCanTake(king, figure, figures)){
+                coords.add(moveCoord);
+            }
+        }
+
+        return coords;
+    }
+
+    private Figure getFigureByCoord(Coord coord, Set<Figure> figures){
+        for (Figure figure : figures) {
+            if(figure.getPosition().equals(coord)){
+                return figure;
+            }
+        }
+
+        //TODO: do something with this!!!
+        return null;
     }
 }
