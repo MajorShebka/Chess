@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 
 public class ClassicChessManagerTest {
     @Test
@@ -27,6 +28,40 @@ public class ClassicChessManagerTest {
         Assertions.assertTrue(result);
     }
 
+    class a{
+        public String a;
+
+        public a(String a) {
+            this.a = a;
+        }
+
+        @Override
+        public String toString() {
+            return "a{" +
+                    "a='" + a + '\'' +
+                    '}';
+        }
+
+        public a clone(){
+            return new a(a);
+        }
+    }
+
+    @Test
+    public void t(){
+        Set<a> s = new HashSet<>();
+        s.addAll(Arrays.asList(new a("name")));
+        Set<a> s2 = new HashSet<>();
+        s2.addAll(s);
+        for (a aa : s){
+            aa.a = "qwert";
+        }
+
+        System.out.println(s);
+        System.out.println(s2);
+
+        Assertions.assertNotEquals(s, s2);
+    }
     @Test
     public void isMateTest(){
         HashSet<Figure> figures = new HashSet<>();
@@ -35,7 +70,7 @@ public class ClassicChessManagerTest {
         figures.addAll(Arrays.asList(
                 new Figure(FigureColor.WHITE, FigureType.HORSE, new Coord(6, 6), new Coord(8, 8), new Coord(1, 1)),
                 new Figure(FigureColor.WHITE, FigureType.TOWER, new Coord(7, 8), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.WHITE, FigureType.TOWER, new Coord(7, 5), new Coord(8, 8), new Coord(1, 1)),
+                new Figure(FigureColor.WHITE, FigureType.PAWN, new Coord(7, 5), new Coord(8, 8), new Coord(1, 1)),
                 new Figure(FigureColor.BLACK, FigureType.PAWN, new Coord(7, 6), new Coord(8, 8), new Coord(1, 1)),
                 new Figure(FigureColor.BLACK, FigureType.HORSE, new Coord(6, 7), new Coord(8, 8), new Coord(1, 1)),
                 new Figure(FigureColor.BLACK, FigureType.PAWN, new Coord(8, 7), new Coord(8, 8), new Coord(1, 1)),
@@ -57,6 +92,82 @@ public class ClassicChessManagerTest {
         ));
 
         result = gm.isMate(figures, FigureColor.BLACK);
+        Assertions.assertFalse(result);
+
+        figures = new HashSet<>();
+
+        figures.addAll(Arrays.asList(
+                new Figure(FigureColor.WHITE, FigureType.HORSE, new Coord(3, 7), new Coord(8, 8), new Coord(1, 1)),
+                new Figure(FigureColor.BLACK, FigureType.PAWN, new Coord(1, 7), new Coord(8, 8), new Coord(1, 1)),
+                new Figure(FigureColor.BLACK, FigureType.PAWN, new Coord(2, 7), new Coord(8, 8), new Coord(1, 1)),
+                new Figure(FigureColor.BLACK, FigureType.TOWER, new Coord(2, 8), new Coord(8, 8), new Coord(1, 1)),
+                new Figure(FigureColor.BLACK, FigureType.KING, new Coord(1, 8), new Coord(8, 8), new Coord(1, 1))
+        ));
+
+        result = gm.isMate(figures, FigureColor.BLACK);
         Assertions.assertTrue(result);
+
+        figures = new HashSet<>();
+
+        figures.addAll(Arrays.asList(
+                new Figure(FigureColor.WHITE, FigureType.HORSE, new Coord(3, 7), new Coord(8, 8), new Coord(1, 1)),
+                new Figure(FigureColor.BLACK, FigureType.PAWN, new Coord(1, 7), new Coord(8, 8), new Coord(1, 1)),
+                new Figure(FigureColor.BLACK, FigureType.PAWN, new Coord(2, 7), new Coord(8, 8), new Coord(1, 1)),
+                new Figure(FigureColor.BLACK, FigureType.KING, new Coord(1, 8), new Coord(8, 8), new Coord(1, 1))
+        ));
+
+        result = gm.isMate(figures, FigureColor.BLACK);
+        Assertions.assertFalse(result);
+
+        figures = new HashSet<>();
+
+        figures.addAll(Arrays.asList(
+                new Figure(FigureColor.WHITE, FigureType.HORSE, new Coord(3, 7), new Coord(8, 8), new Coord(1, 1)),
+                new Figure(FigureColor.BLACK, FigureType.PAWN, new Coord(1, 7), new Coord(8, 8), new Coord(1, 1)),
+                new Figure(FigureColor.WHITE, FigureType.PAWN, new Coord(2, 7), new Coord(8, 8), new Coord(1, 1)),
+                new Figure(FigureColor.BLACK, FigureType.TOWER, new Coord(2, 8), new Coord(8, 8), new Coord(1, 1)),
+                new Figure(FigureColor.BLACK, FigureType.KING, new Coord(1, 8), new Coord(8, 8), new Coord(1, 1))
+        ));
+
+        result = gm.isMate(figures, FigureColor.BLACK);
+        Assertions.assertFalse(result);
+
+        figures = new HashSet<>();
+
+        figures.addAll(Arrays.asList(
+                new Figure(FigureColor.WHITE, FigureType.HORSE, new Coord(4, 7), new Coord(8, 8), new Coord(1, 1)),
+                new Figure(FigureColor.WHITE, FigureType.TOWER, new Coord(1, 5), new Coord(8, 8), new Coord(1, 1)),
+                new Figure(FigureColor.BLACK, FigureType.PAWN, new Coord(2, 7), new Coord(8, 8), new Coord(1, 1)),
+                new Figure(FigureColor.BLACK, FigureType.KING, new Coord(1, 7), new Coord(8, 8), new Coord(1, 1))
+        ));
+
+        result = gm.isMate(figures, FigureColor.BLACK);
+        Assertions.assertTrue(result);
+
+        figures = new HashSet<>();
+
+        figures.addAll(Arrays.asList(
+                new Figure(FigureColor.WHITE, FigureType.HORSE, new Coord(4, 7), new Coord(8, 8), new Coord(1, 1)),
+                new Figure(FigureColor.WHITE, FigureType.TOWER, new Coord(1, 5), new Coord(8, 8), new Coord(1, 1)),
+                new Figure(FigureColor.BLACK, FigureType.PAWN, new Coord(2, 7), new Coord(8, 8), new Coord(1, 1)),
+                new Figure(FigureColor.BLACK, FigureType.QUEEN, new Coord(1, 1), new Coord(8, 8), new Coord(1, 1)),
+                new Figure(FigureColor.BLACK, FigureType.KING, new Coord(1, 7), new Coord(8, 8), new Coord(1, 1))
+        ));
+
+        result = gm.isMate(figures, FigureColor.BLACK);
+        Assertions.assertFalse(result);
+
+        figures = new HashSet<>();
+
+        figures.addAll(Arrays.asList(
+                new Figure(FigureColor.WHITE, FigureType.HORSE, new Coord(4, 7), new Coord(8, 8), new Coord(1, 1)),
+                new Figure(FigureColor.WHITE, FigureType.TOWER, new Coord(1, 5), new Coord(8, 8), new Coord(1, 1)),
+                new Figure(FigureColor.BLACK, FigureType.PAWN, new Coord(2, 7), new Coord(8, 8), new Coord(1, 1)),
+                new Figure(FigureColor.BLACK, FigureType.BISHOP, new Coord(6, 1), new Coord(8, 8), new Coord(1, 1)),
+                new Figure(FigureColor.BLACK, FigureType.KING, new Coord(1, 7), new Coord(8, 8), new Coord(1, 1))
+        ));
+
+        result = gm.isMate(figures, FigureColor.BLACK);
+        Assertions.assertFalse(result);
     }
 }

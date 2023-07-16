@@ -1,5 +1,6 @@
 package org.chess.entity.gameManagerImpl;
 
+import org.chess.Utils;
 import org.chess.entity.FigureManager;
 import org.chess.entity.FigureManagerFactory;
 import org.chess.entity.GameManager;
@@ -59,10 +60,10 @@ public class ClassicChessManager implements GameManager {
     private boolean isKingHaveUsefulMove(Set<Figure> figures, FigureColor movingColor) {
         Figure king = detectKing(figures, movingColor);
         KingManager manager = new KingManager();
-        List<Coord> moveCoords = manager.getMoveCoords(king, figures);
+        Set<Coord> moveCoords = manager.getMoveCoords(king, figures);
 
         for (Coord nextCoord : moveCoords) {
-            Set<Figure> intermediateFigures = new HashSet<>(figures);
+            Set<Figure> intermediateFigures = Utils.copyValuesInSet(figures);
             king = detectKing(intermediateFigures, movingColor);
             Figure figure = getFigureByCoord(intermediateFigures, nextCoord);
 
@@ -97,17 +98,18 @@ public class ClassicChessManager implements GameManager {
         //Can be null
         Figure attackFigure = getFigureThatAttack(king, figures);
         FigureManager manager = factory.create(attackFigure.getType());
-        Set<Figure> intermediateFigures = new HashSet<>(figures);
+        Set<Figure> intermediateFigures = Utils.copyValuesInSet(figures);
 
         List<Coord> coordsBetween = manager.getCoordsBetween(attackFigure, king.getPosition());
 
         for (Coord nextCoord : coordsBetween) {
             for (Figure figure : intermediateFigures) {
+                manager = factory.create(figure.getType());
                 king = detectKing(intermediateFigures, movingColor);
-
+                Figure takenFigure = getFigureByCoord(figures, nextCoord);
                 if (manager.isCanMove(figure, nextCoord, intermediateFigures) && figure.getColor().equals(movingColor)) {
                     manager.moveOn(figure, nextCoord);
-                } else if (manager.isCanTake(figure, getFigureByCoord(figures, nextCoord), intermediateFigures)
+                } else if (takenFigure!= null && manager.isCanTake(figure, takenFigure, intermediateFigures)
                         && figure.getColor().equals(movingColor)) {
                     manager.takeFigure(king, figure);
                     figures.remove(figure);
@@ -117,7 +119,7 @@ public class ClassicChessManager implements GameManager {
                     return true;
                 }
 
-                intermediateFigures = new HashSet<>(figures);
+                intermediateFigures = Utils.copyValuesInSet(figures);
             }
         }
 
@@ -128,21 +130,21 @@ public class ClassicChessManager implements GameManager {
         Figure king = detectKing(figures, movingColor);
         //Can be null
         Figure attackFigure = getFigureThatAttack(king, figures);
-        Set<Figure> intermediateFigures = new HashSet<>(figures);
+        Set<Figure> intermediateFigures = Utils.copyValuesInSet(figures);
 
-        for (Figure nextFigure : intermediateFigures) {
+        for (Figure nextFigure : figures) {
             FigureManager manager = factory.create(nextFigure.getType());
 
-            if (manager.isCanTake(nextFigure, attackFigure, figures)) {
+            if (manager.isCanTake(nextFigure, attackFigure, intermediateFigures)) {
                 manager.takeFigure(nextFigure, attackFigure);
-                figures.remove(attackFigure);
+                intermediateFigures.remove(attackFigure);
             }
 
             if (!isCheck(intermediateFigures, movingColor)) {
                 return true;
             }
 
-            intermediateFigures = new HashSet<>(figures);
+            intermediateFigures = Utils.copyValuesInSet(figures);
         }
 
         return false;

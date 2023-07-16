@@ -77,4 +77,9 @@ public class Figure {
     public int hashCode() {
         return figureCoord.hashCode();
     }
+
+    public Figure clone(){
+        return new Figure(color, type, new Coord(figureCoord.getXCoord(),
+                figureCoord.getYCoord()), maxCoord, minCoord);
+    }
 }

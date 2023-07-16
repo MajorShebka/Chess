@@ -6,6 +6,7 @@ import org.chess.entity.models.Coord;
 import org.chess.entity.models.Figure;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,7 +17,8 @@ public class KingManager implements FigureManager {
     }
 
     public boolean isCanMove(Figure movingFigure, Coord moveCoord, Set<Figure> figures) {
-        return checkMove(moveCoord, movingFigure);
+        return checkMove(moveCoord, movingFigure)
+                && !figures.contains(new Figure(null, null, moveCoord, null, null));
     }
 
     private boolean checkMove(Coord moveCoord, Figure movingFigure) {
@@ -77,9 +79,9 @@ public class KingManager implements FigureManager {
         takenFigure.setPosition(new Coord(0, 0));
     }
 
-    public List<Coord> getMoveCoords(Figure king, Set<Figure> figures){
+    public Set<Coord> getMoveCoords(Figure king, Set<Figure> figures){
         final int[][] moveCoffs = new int[][]{{1, 0}, {0, 1}, {1, 1}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}};
-        List<Coord> coords = new ArrayList<>();
+        Set<Coord> coords = new HashSet<>();
 
         for(int i = 0; i < moveCoffs.length; i++){
             int newXCoord = king.getPosition().getXCoord() + moveCoffs[i][0];
