@@ -1,4 +1,4 @@
-package org.example.figureManagerTest;
+package org.chess.figureManagerTest;
 
 import org.chess.entity.FigureManager;
 import org.chess.entity.enums.FigureColor;

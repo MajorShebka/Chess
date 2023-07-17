@@ -1,71 +1,46 @@
-package org.gameManagerTest;
+package org.chess.serviceTest.gameActionTest;
 
+import org.chess.entity.FigureManagerFactory;
 import org.chess.entity.GameManager;
 import org.chess.entity.enums.FigureColor;
 import org.chess.entity.enums.FigureType;
+import org.chess.entity.figureManagerFactoryImpl.ClassicalChessFigureManagerFactory;
 import org.chess.entity.gameManagerImpl.ClassicChessManager;
 import org.chess.entity.models.Coord;
 import org.chess.entity.models.Figure;
+import org.chess.usecase.models.Board;
+import org.chess.usecase.services.gameActionsServiceImpl.ClassicChessGameActions;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Set;
 
-public class ClassicChessManagerTest {
+public class ClassicChessGameActionsTest {
     @Test
     public void isCheckTest(){
         HashSet<Figure> figures = new HashSet<>();
         GameManager gm = new ClassicChessManager();
+        FigureManagerFactory factory = new ClassicalChessFigureManagerFactory();
 
         figures.addAll(Arrays.asList(
                 new Figure(FigureColor.WHITE, FigureType.HORSE, new Coord(4, 4), new Coord(8, 8), new Coord(1, 1)),
                 new Figure(FigureColor.BLACK, FigureType.KING, new Coord(3, 2), new Coord(8, 8), new Coord(1, 1))
         ));
 
-        boolean result = gm.isCheck(figures, FigureColor.BLACK);
+        Board board = new Board(new Coord(8,8), new Coord(1, 1), figures, FigureColor.BLACK);
+
+        ClassicChessGameActions gameActions = new ClassicChessGameActions(board, factory, gm);
+
+        boolean result = gameActions.isCheck();
         Assertions.assertTrue(result);
     }
 
-    class a{
-        public String a;
-
-        public a(String a) {
-            this.a = a;
-        }
-
-        @Override
-        public String toString() {
-            return "a{" +
-                    "a='" + a + '\'' +
-                    '}';
-        }
-
-        public a clone(){
-            return new a(a);
-        }
-    }
-
-    @Test
-    public void t(){
-        Set<a> s = new HashSet<>();
-        s.addAll(Arrays.asList(new a("name")));
-        Set<a> s2 = new HashSet<>();
-        s2.addAll(s);
-        for (a aa : s){
-            aa.a = "qwert";
-        }
-
-        System.out.println(s);
-        System.out.println(s2);
-
-        Assertions.assertNotEquals(s, s2);
-    }
     @Test
     public void isMateTest(){
         HashSet<Figure> figures = new HashSet<>();
         GameManager gm = new ClassicChessManager();
+        FigureManagerFactory factory = new ClassicalChessFigureManagerFactory();
 
         figures.addAll(Arrays.asList(
                 new Figure(FigureColor.WHITE, FigureType.HORSE, new Coord(6, 6), new Coord(8, 8), new Coord(1, 1)),
@@ -77,7 +52,11 @@ public class ClassicChessManagerTest {
                 new Figure(FigureColor.BLACK, FigureType.KING, new Coord(7, 7), new Coord(8, 8), new Coord(1, 1))
         ));
 
-        boolean result = gm.isMate(figures, FigureColor.BLACK);
+        Board board = new Board(new Coord(8,8), new Coord(1, 1), figures, FigureColor.BLACK);
+
+        ClassicChessGameActions gameActions = new ClassicChessGameActions(board, factory, gm);
+
+        boolean result = gameActions.isMate();
         Assertions.assertTrue(result);
 
         figures = new HashSet<>();
@@ -91,7 +70,11 @@ public class ClassicChessManagerTest {
                 new Figure(FigureColor.BLACK, FigureType.KING, new Coord(7, 7), new Coord(8, 8), new Coord(1, 1))
         ));
 
-        result = gm.isMate(figures, FigureColor.BLACK);
+        board = new Board(new Coord(8,8), new Coord(1, 1), figures, FigureColor.BLACK);
+
+        gameActions = new ClassicChessGameActions(board, factory, gm);
+
+        result = gameActions.isMate();
         Assertions.assertFalse(result);
 
         figures = new HashSet<>();
@@ -104,7 +87,11 @@ public class ClassicChessManagerTest {
                 new Figure(FigureColor.BLACK, FigureType.KING, new Coord(1, 8), new Coord(8, 8), new Coord(1, 1))
         ));
 
-        result = gm.isMate(figures, FigureColor.BLACK);
+        board = new Board(new Coord(8,8), new Coord(1, 1), figures, FigureColor.BLACK);
+
+        gameActions = new ClassicChessGameActions(board, factory, gm);
+
+        result = gameActions.isMate();
         Assertions.assertTrue(result);
 
         figures = new HashSet<>();
@@ -116,7 +103,11 @@ public class ClassicChessManagerTest {
                 new Figure(FigureColor.BLACK, FigureType.KING, new Coord(1, 8), new Coord(8, 8), new Coord(1, 1))
         ));
 
-        result = gm.isMate(figures, FigureColor.BLACK);
+        board = new Board(new Coord(8,8), new Coord(1, 1), figures, FigureColor.BLACK);
+
+        gameActions = new ClassicChessGameActions(board, factory, gm);
+
+        result = gameActions.isMate();
         Assertions.assertFalse(result);
 
         figures = new HashSet<>();
@@ -129,7 +120,11 @@ public class ClassicChessManagerTest {
                 new Figure(FigureColor.BLACK, FigureType.KING, new Coord(1, 8), new Coord(8, 8), new Coord(1, 1))
         ));
 
-        result = gm.isMate(figures, FigureColor.BLACK);
+        board = new Board(new Coord(8,8), new Coord(1, 1), figures, FigureColor.BLACK);
+
+        gameActions = new ClassicChessGameActions(board, factory, gm);
+
+        result = gameActions.isMate();
         Assertions.assertFalse(result);
 
         figures = new HashSet<>();
@@ -141,7 +136,11 @@ public class ClassicChessManagerTest {
                 new Figure(FigureColor.BLACK, FigureType.KING, new Coord(1, 7), new Coord(8, 8), new Coord(1, 1))
         ));
 
-        result = gm.isMate(figures, FigureColor.BLACK);
+        board = new Board(new Coord(8,8), new Coord(1, 1), figures, FigureColor.BLACK);
+
+        gameActions = new ClassicChessGameActions(board, factory, gm);
+
+        result = gameActions.isMate();
         Assertions.assertTrue(result);
 
         figures = new HashSet<>();
@@ -154,7 +153,11 @@ public class ClassicChessManagerTest {
                 new Figure(FigureColor.BLACK, FigureType.KING, new Coord(1, 7), new Coord(8, 8), new Coord(1, 1))
         ));
 
-        result = gm.isMate(figures, FigureColor.BLACK);
+        board = new Board(new Coord(8,8), new Coord(1, 1), figures, FigureColor.BLACK);
+
+        gameActions = new ClassicChessGameActions(board, factory, gm);
+
+        result = gameActions.isMate();
         Assertions.assertFalse(result);
 
         figures = new HashSet<>();
@@ -167,7 +170,11 @@ public class ClassicChessManagerTest {
                 new Figure(FigureColor.BLACK, FigureType.KING, new Coord(1, 7), new Coord(8, 8), new Coord(1, 1))
         ));
 
-        result = gm.isMate(figures, FigureColor.BLACK);
+        board = new Board(new Coord(8,8), new Coord(1, 1), figures, FigureColor.BLACK);
+
+        gameActions = new ClassicChessGameActions(board, factory, gm);
+
+        result = gameActions.isMate();
         Assertions.assertFalse(result);
     }
 }
