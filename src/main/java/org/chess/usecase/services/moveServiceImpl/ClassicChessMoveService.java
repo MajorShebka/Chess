@@ -20,9 +20,9 @@ public class ClassicChessMoveService extends MoveService {
         Coord moveCoord = initCoordFromDTO(coordDTO);
         FigureManager figureManager = figureManagerFactory.create(movingFigure.getType());
 
-        if(figureManager.isCanMove(movingFigure, moveCoord, board.getFiguresOnTheBoard())){
+        if(figureManager.isCanMove(movingFigure, moveCoord, board.getFiguresOnTheBoard())
+                && movingFigure.getColor().equals(board.getMovingColor())){
             figureManager.moveOn(movingFigure, moveCoord);
-            board.changeMovingColor();
         }
     }
 

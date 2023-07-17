@@ -18,7 +18,8 @@ public class ClassicChessTakeService extends TakeService {
         Figure takenFigure = initFigureFromDTO(takenFigureDTO);
         FigureManager figureManager = figureManagerFactory.create(takenFigure.getType());
 
-        if(figureManager.isCanTake(takingFigure, takenFigure, board.getFiguresOnTheBoard())){
+        if(figureManager.isCanTake(takingFigure, takenFigure, board.getFiguresOnTheBoard())
+                && takingFigure.getColor().equals(board.getMovingColor())){
             board.getFiguresOnTheBoard().remove(takenFigure);
             figureManager.takeFigure(takingFigure, takenFigure);
             board.changeMovingColor();
