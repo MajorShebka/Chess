@@ -33,6 +33,7 @@ public class TowerManagerTest {
         boolean result = manager.isCanMove(tower, new Coord(1, 8), figures);
         Assertions.assertTrue(result);
 
+        figures = new HashSet<>();
         figures.add(new Figure(FigureColor.WHITE,
                 FigureType.PAWN, new Coord(1, 2), null, null));
 
@@ -42,10 +43,18 @@ public class TowerManagerTest {
         result = manager.isCanMove(tower, new Coord(8, 1), figures);
         Assertions.assertTrue(result);
 
+        figures = new HashSet<>();
         figures.add(new Figure(FigureColor.WHITE,
                 FigureType.BISHOP, new Coord(3, 1), null, null));
 
         result = manager.isCanMove(tower, new Coord(8, 1), figures);
+        Assertions.assertFalse(result);
+
+        figures = new HashSet<>();
+        figures.add(new Figure(FigureColor.WHITE, FigureType.BISHOP,
+                new Coord(1, 2), null, null));
+
+        result = manager.isCanMove(tower, new Coord(1, 3), figures);
         Assertions.assertFalse(result);
     }
 

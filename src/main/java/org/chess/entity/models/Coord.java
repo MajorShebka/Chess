@@ -1,9 +1,11 @@
 package org.chess.entity.models;
 
-import java.util.Objects;
+import com.fasterxml.jackson.annotation.*;
 
 public class Coord {
+    @JsonProperty("xCoord")
     private int xCoord;
+    @JsonProperty("yCoord")
     private int yCoord;
 
     public Coord(int xCoord, int yCoord) {
@@ -11,30 +13,23 @@ public class Coord {
         this.yCoord = yCoord;
     }
 
-    public boolean isOutOfBounds(Coord boundCoord){
-        if( xCoord > boundCoord.getXCoord() || xCoord < boundCoord.getXCoord()
-                || yCoord > boundCoord.getYCoord() || yCoord < boundCoord.getYCoord()){
-            return true;
-        }
-
-        return false;
-    }
-
+    @JsonGetter("xCoord")
     public int getXCoord() {
         return xCoord;
     }
 
+    @JsonGetter("yCoord")
     public int getYCoord() {
         return yCoord;
     }
 
-    @Override
-    public String toString() {
-        return "Coord{" +
-                "xCoord=" + xCoord +
-                ", yCoord=" + yCoord +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Coord{" +
+//                "xCoord=" + xCoord +
+//                ", yCoord=" + yCoord +
+//                '}';
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -47,5 +42,15 @@ public class Coord {
     @Override
     public int hashCode() {
         return xCoord + 10 * yCoord;
+    }
+
+    @JsonSetter("xCoord")
+    public void setxCoord(int xCoord) {
+        this.xCoord = xCoord;
+    }
+
+    @JsonSetter("yCoord")
+    public void setyCoord(int yCoord) {
+        this.yCoord = yCoord;
     }
 }

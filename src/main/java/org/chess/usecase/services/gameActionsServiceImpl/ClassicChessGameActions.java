@@ -2,6 +2,7 @@ package org.chess.usecase.services.gameActionsServiceImpl;
 
 import org.chess.entity.FigureManagerFactory;
 import org.chess.entity.GameManager;
+import org.chess.entity.gameManagerImpl.ClassicChessManager;
 import org.chess.usecase.models.Board;
 import org.chess.usecase.services.GameActionsService;
 
@@ -10,13 +11,18 @@ public class ClassicChessGameActions extends GameActionsService {
         super(board, figureManagerFactory, gameManager);
     }
 
+    public ClassicChessGameActions(FigureManagerFactory factory) {
+        super(factory);
+        gameManager = new ClassicChessManager();
+    }
+
     @Override
     public boolean isCheck() {
-        return gameManager.isCheck(board.getFiguresOnTheBoard(), board.getMovingColor());
+        return gameManager.isCheck(convertFigureDTOtoFigure(board.getFiguresOnTheBoard()), board.getMovingColor());
     }
 
     @Override
     public boolean isMate() {
-        return gameManager.isMate(board.getFiguresOnTheBoard(), board.getMovingColor());
+        return gameManager.isMate(convertFigureDTOtoFigure(board.getFiguresOnTheBoard()), board.getMovingColor());
     }
 }

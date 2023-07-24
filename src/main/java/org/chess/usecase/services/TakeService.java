@@ -11,5 +11,9 @@ public abstract class TakeService extends Service {
         super(board, figureManagerFactory);
     }
 
+    public TakeService(FigureManagerFactory factory) {
+        super(factory);
+    }
+
     public abstract void take(FigureDTO takingFigureDTO, FigureDTO takenFigureDTO) throws IncorrectMoveException, IncorrectTakeException;
 }

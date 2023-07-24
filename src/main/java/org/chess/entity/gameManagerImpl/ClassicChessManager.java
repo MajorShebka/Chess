@@ -6,17 +6,16 @@ import org.chess.entity.FigureManagerFactory;
 import org.chess.entity.GameManager;
 import org.chess.entity.enums.FigureColor;
 import org.chess.entity.enums.FigureType;
-import org.chess.entity.figureManagerFactoryImpl.ClassicalChessFigureManagerFactory;
+import org.chess.entity.figureManagerFactoryImpl.ClassicChessFigureManagerFactory;
 import org.chess.entity.figureManagerImpl.KingManager;
 import org.chess.entity.models.Coord;
 import org.chess.entity.models.Figure;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class ClassicChessManager implements GameManager {
-    private final FigureManagerFactory factory = new ClassicalChessFigureManagerFactory();
+    private final FigureManagerFactory factory = new ClassicChessFigureManagerFactory();
 
     @Override
     public boolean isCheck(Set<Figure> figures, FigureColor movingColor) {

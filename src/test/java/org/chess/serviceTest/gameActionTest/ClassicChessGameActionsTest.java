@@ -4,11 +4,12 @@ import org.chess.entity.FigureManagerFactory;
 import org.chess.entity.GameManager;
 import org.chess.entity.enums.FigureColor;
 import org.chess.entity.enums.FigureType;
-import org.chess.entity.figureManagerFactoryImpl.ClassicalChessFigureManagerFactory;
+import org.chess.entity.figureManagerFactoryImpl.ClassicChessFigureManagerFactory;
 import org.chess.entity.gameManagerImpl.ClassicChessManager;
 import org.chess.entity.models.Coord;
-import org.chess.entity.models.Figure;
 import org.chess.usecase.models.Board;
+import org.chess.usecase.models.dto.CoordDTO;
+import org.chess.usecase.models.dto.FigureDTO;
 import org.chess.usecase.services.gameActionsServiceImpl.ClassicChessGameActions;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -19,13 +20,13 @@ import java.util.HashSet;
 public class ClassicChessGameActionsTest {
     @Test
     public void isCheckTest(){
-        HashSet<Figure> figures = new HashSet<>();
+        HashSet<FigureDTO> figures = new HashSet<>();
         GameManager gm = new ClassicChessManager();
-        FigureManagerFactory factory = new ClassicalChessFigureManagerFactory();
+        FigureManagerFactory factory = new ClassicChessFigureManagerFactory();
 
         figures.addAll(Arrays.asList(
-                new Figure(FigureColor.WHITE, FigureType.HORSE, new Coord(4, 4), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.KING, new Coord(3, 2), new Coord(8, 8), new Coord(1, 1))
+                new FigureDTO(FigureColor.WHITE, FigureType.HORSE, new CoordDTO(4, 4)),
+                new FigureDTO(FigureColor.BLACK, FigureType.KING, new CoordDTO(3, 2))
         ));
 
         Board board = new Board(new Coord(8,8), new Coord(1, 1), figures, FigureColor.BLACK);
@@ -38,18 +39,18 @@ public class ClassicChessGameActionsTest {
 
     @Test
     public void isMateTest(){
-        HashSet<Figure> figures = new HashSet<>();
+        HashSet<FigureDTO> figures = new HashSet<>();
         GameManager gm = new ClassicChessManager();
-        FigureManagerFactory factory = new ClassicalChessFigureManagerFactory();
+        FigureManagerFactory factory = new ClassicChessFigureManagerFactory();
 
         figures.addAll(Arrays.asList(
-                new Figure(FigureColor.WHITE, FigureType.HORSE, new Coord(6, 6), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.WHITE, FigureType.TOWER, new Coord(7, 8), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.WHITE, FigureType.PAWN, new Coord(7, 5), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.PAWN, new Coord(7, 6), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.HORSE, new Coord(6, 7), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.PAWN, new Coord(8, 7), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.KING, new Coord(7, 7), new Coord(8, 8), new Coord(1, 1))
+                new FigureDTO(FigureColor.WHITE, FigureType.HORSE, new CoordDTO(6, 6)),
+                new FigureDTO(FigureColor.WHITE, FigureType.TOWER, new CoordDTO(7, 8)),
+                new FigureDTO(FigureColor.WHITE, FigureType.PAWN, new CoordDTO(7, 5)),
+                new FigureDTO(FigureColor.BLACK, FigureType.PAWN, new CoordDTO(7, 6)),
+                new FigureDTO(FigureColor.BLACK, FigureType.HORSE, new CoordDTO(6, 7)),
+                new FigureDTO(FigureColor.BLACK, FigureType.PAWN, new CoordDTO(8, 7)),
+                new FigureDTO(FigureColor.BLACK, FigureType.KING, new CoordDTO(7, 7))
         ));
 
         Board board = new Board(new Coord(8,8), new Coord(1, 1), figures, FigureColor.BLACK);
@@ -62,12 +63,12 @@ public class ClassicChessGameActionsTest {
         figures = new HashSet<>();
 
         figures.addAll(Arrays.asList(
-                new Figure(FigureColor.WHITE, FigureType.HORSE, new Coord(6, 6), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.WHITE, FigureType.TOWER, new Coord(7, 8), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.WHITE, FigureType.TOWER, new Coord(7, 5), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.PAWN, new Coord(7, 6), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.PAWN, new Coord(8, 7), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.KING, new Coord(7, 7), new Coord(8, 8), new Coord(1, 1))
+                new FigureDTO(FigureColor.WHITE, FigureType.HORSE, new CoordDTO(6, 6)),
+                new FigureDTO(FigureColor.WHITE, FigureType.TOWER, new CoordDTO(7, 8)),
+                new FigureDTO(FigureColor.WHITE, FigureType.TOWER, new CoordDTO(7, 5)),
+                new FigureDTO(FigureColor.BLACK, FigureType.PAWN, new CoordDTO(7, 6)),
+                new FigureDTO(FigureColor.BLACK, FigureType.PAWN, new CoordDTO(8, 7)),
+                new FigureDTO(FigureColor.BLACK, FigureType.KING, new CoordDTO(7, 7))
         ));
 
         board = new Board(new Coord(8,8), new Coord(1, 1), figures, FigureColor.BLACK);
@@ -80,11 +81,11 @@ public class ClassicChessGameActionsTest {
         figures = new HashSet<>();
 
         figures.addAll(Arrays.asList(
-                new Figure(FigureColor.WHITE, FigureType.HORSE, new Coord(3, 7), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.PAWN, new Coord(1, 7), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.PAWN, new Coord(2, 7), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.TOWER, new Coord(2, 8), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.KING, new Coord(1, 8), new Coord(8, 8), new Coord(1, 1))
+                new FigureDTO(FigureColor.WHITE, FigureType.HORSE, new CoordDTO(3, 7)),
+                new FigureDTO(FigureColor.BLACK, FigureType.PAWN, new CoordDTO(1, 7)),
+                new FigureDTO(FigureColor.BLACK, FigureType.PAWN, new CoordDTO(2, 7)),
+                new FigureDTO(FigureColor.BLACK, FigureType.TOWER, new CoordDTO(2, 8)),
+                new FigureDTO(FigureColor.BLACK, FigureType.KING, new CoordDTO(1, 8))
         ));
 
         board = new Board(new Coord(8,8), new Coord(1, 1), figures, FigureColor.BLACK);
@@ -97,10 +98,10 @@ public class ClassicChessGameActionsTest {
         figures = new HashSet<>();
 
         figures.addAll(Arrays.asList(
-                new Figure(FigureColor.WHITE, FigureType.HORSE, new Coord(3, 7), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.PAWN, new Coord(1, 7), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.PAWN, new Coord(2, 7), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.KING, new Coord(1, 8), new Coord(8, 8), new Coord(1, 1))
+                new FigureDTO(FigureColor.WHITE, FigureType.HORSE, new CoordDTO(3, 7)),
+                new FigureDTO(FigureColor.BLACK, FigureType.PAWN, new CoordDTO(1, 7)),
+                new FigureDTO(FigureColor.BLACK, FigureType.PAWN, new CoordDTO(2, 7)),
+                new FigureDTO(FigureColor.BLACK, FigureType.KING, new CoordDTO(1, 8))
         ));
 
         board = new Board(new Coord(8,8), new Coord(1, 1), figures, FigureColor.BLACK);
@@ -113,11 +114,11 @@ public class ClassicChessGameActionsTest {
         figures = new HashSet<>();
 
         figures.addAll(Arrays.asList(
-                new Figure(FigureColor.WHITE, FigureType.HORSE, new Coord(3, 7), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.PAWN, new Coord(1, 7), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.WHITE, FigureType.PAWN, new Coord(2, 7), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.TOWER, new Coord(2, 8), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.KING, new Coord(1, 8), new Coord(8, 8), new Coord(1, 1))
+                new FigureDTO(FigureColor.WHITE, FigureType.HORSE, new CoordDTO(3, 7)),
+                new FigureDTO(FigureColor.BLACK, FigureType.PAWN, new CoordDTO(1, 7)),
+                new FigureDTO(FigureColor.WHITE, FigureType.PAWN, new CoordDTO(2, 7)),
+                new FigureDTO(FigureColor.BLACK, FigureType.TOWER, new CoordDTO(2, 8)),
+                new FigureDTO(FigureColor.BLACK, FigureType.KING, new CoordDTO(1, 8))
         ));
 
         board = new Board(new Coord(8,8), new Coord(1, 1), figures, FigureColor.BLACK);
@@ -130,10 +131,10 @@ public class ClassicChessGameActionsTest {
         figures = new HashSet<>();
 
         figures.addAll(Arrays.asList(
-                new Figure(FigureColor.WHITE, FigureType.HORSE, new Coord(4, 7), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.WHITE, FigureType.TOWER, new Coord(1, 5), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.PAWN, new Coord(2, 7), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.KING, new Coord(1, 7), new Coord(8, 8), new Coord(1, 1))
+                new FigureDTO(FigureColor.WHITE, FigureType.HORSE, new CoordDTO(4, 7)),
+                new FigureDTO(FigureColor.WHITE, FigureType.TOWER, new CoordDTO(1, 5)),
+                new FigureDTO(FigureColor.BLACK, FigureType.PAWN, new CoordDTO(2, 7)),
+                new FigureDTO(FigureColor.BLACK, FigureType.KING, new CoordDTO(1, 7))
         ));
 
         board = new Board(new Coord(8,8), new Coord(1, 1), figures, FigureColor.BLACK);
@@ -146,11 +147,11 @@ public class ClassicChessGameActionsTest {
         figures = new HashSet<>();
 
         figures.addAll(Arrays.asList(
-                new Figure(FigureColor.WHITE, FigureType.HORSE, new Coord(4, 7), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.WHITE, FigureType.TOWER, new Coord(1, 5), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.PAWN, new Coord(2, 7), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.QUEEN, new Coord(1, 1), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.KING, new Coord(1, 7), new Coord(8, 8), new Coord(1, 1))
+                new FigureDTO(FigureColor.WHITE, FigureType.HORSE, new CoordDTO(4, 7)),
+                new FigureDTO(FigureColor.WHITE, FigureType.TOWER, new CoordDTO(1, 5)),
+                new FigureDTO(FigureColor.BLACK, FigureType.PAWN, new CoordDTO(2, 7)),
+                new FigureDTO(FigureColor.BLACK, FigureType.QUEEN, new CoordDTO(1, 1)),
+                new FigureDTO(FigureColor.BLACK, FigureType.KING, new CoordDTO(1, 7))
         ));
 
         board = new Board(new Coord(8,8), new Coord(1, 1), figures, FigureColor.BLACK);
@@ -163,11 +164,11 @@ public class ClassicChessGameActionsTest {
         figures = new HashSet<>();
 
         figures.addAll(Arrays.asList(
-                new Figure(FigureColor.WHITE, FigureType.HORSE, new Coord(4, 7), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.WHITE, FigureType.TOWER, new Coord(1, 5), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.PAWN, new Coord(2, 7), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.BISHOP, new Coord(6, 1), new Coord(8, 8), new Coord(1, 1)),
-                new Figure(FigureColor.BLACK, FigureType.KING, new Coord(1, 7), new Coord(8, 8), new Coord(1, 1))
+                new FigureDTO(FigureColor.WHITE, FigureType.HORSE, new CoordDTO(4, 7)),
+                new FigureDTO(FigureColor.WHITE, FigureType.TOWER, new CoordDTO(1, 5)),
+                new FigureDTO(FigureColor.BLACK, FigureType.PAWN, new CoordDTO(2, 7)),
+                new FigureDTO(FigureColor.BLACK, FigureType.BISHOP, new CoordDTO(6, 1)),
+                new FigureDTO(FigureColor.BLACK, FigureType.KING, new CoordDTO(1, 7))
         ));
 
         board = new Board(new Coord(8,8), new Coord(1, 1), figures, FigureColor.BLACK);

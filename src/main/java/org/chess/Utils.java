@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class Utils {
     public static Set<Figure> copyValuesInSet(Set<Figure> set){
-        Set<Figure> newSet = new HashSet<>();
+        Set<Figure> newSet = new HashSet<Figure>();
         for (Figure val : set){
             newSet.add(val.clone());
         }

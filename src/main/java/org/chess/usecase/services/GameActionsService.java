@@ -11,6 +11,10 @@ public abstract class GameActionsService extends Service{
         this.gameManager = gameManager;
     }
 
+    public GameActionsService(FigureManagerFactory factory) {
+        super(factory);
+    }
+
     public abstract boolean isCheck();
 
     public abstract boolean isMate();

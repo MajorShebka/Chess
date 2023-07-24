@@ -5,7 +5,7 @@ import org.chess.entity.FigureManagerFactory;
 import org.chess.entity.enums.FigureType;
 import org.chess.entity.figureManagerImpl.*;
 
-public class ClassicalChessFigureManagerFactory implements FigureManagerFactory {
+public class ClassicChessFigureManagerFactory implements FigureManagerFactory {
     public FigureManager create(FigureType figureType) {
         switch (figureType) {
             case PAWN:
@@ -24,5 +24,10 @@ public class ClassicalChessFigureManagerFactory implements FigureManagerFactory 
                 //TODO: refactor this piece of shit! u must not return null
                 return null;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "ClassicalChessFigureManagerFactory{}";
     }
 }

@@ -13,7 +13,7 @@ import java.util.Set;
 public class KingManager implements FigureManager {
     @Override
     public List<Coord> getCoordsBetween(Figure figure, Coord coord) {
-        return new ArrayList<>();
+        return new ArrayList<Coord>();
     }
 
     public boolean isCanMove(Figure movingFigure, Coord moveCoord, Set<Figure> figures) {
@@ -81,7 +81,7 @@ public class KingManager implements FigureManager {
 
     public Set<Coord> getMoveCoords(Figure king, Set<Figure> figures){
         final int[][] moveCoffs = new int[][]{{1, 0}, {0, 1}, {1, 1}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}};
-        Set<Coord> coords = new HashSet<>();
+        Set<Coord> coords = new HashSet<Coord>();
 
         for(int i = 0; i < moveCoffs.length; i++){
             int newXCoord = king.getPosition().getXCoord() + moveCoffs[i][0];
